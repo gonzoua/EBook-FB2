@@ -22,11 +22,11 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description::TitleInfo;
+package EBook::FB2::Description::TitleInfo;
 use Moose;
-use FB2::Book::Description::Author;
-use FB2::Book::Description::Genre;
-use FB2::Book::Description::Sequence;
+use EBook::FB2::Description::Author;
+use EBook::FB2::Description::Genre;
+use EBook::FB2::Description::Sequence;
 
 has [qw/book_title keywords date lang src_lang/] => (
     isa     => 'Str',
@@ -116,28 +116,28 @@ sub load
     # Now handle multiple entities
     @nodes = $node->findnodes('author');
     foreach my $node (@nodes) {
-        my $author = FB2::Book::Description::Author->new;
+        my $author = EBook::FB2::Description::Author->new;
         $author->load($node);
         $self->add_author($author);
     }
 
     @nodes = $node->findnodes('translator');
     foreach my $node (@nodes) {
-        my $translator = FB2::Book::Description::Author->new;
+        my $translator = EBook::FB2::Description::Author->new;
         $translator->load($node);
         $self->add_translator($translator);
     }
 
     @nodes = $node->findnodes('genre');
     foreach my $node (@nodes) {
-        my $genre = FB2::Book::Description::Genre->new;
+        my $genre = EBook::FB2::Description::Genre->new;
         $genre->load($node);
         $self->add_genre($genre);
     }
 
     @nodes = $node->findnodes('sequence');
     foreach my $node (@nodes) {
-        my $seq = FB2::Book::Description::Sequence->new;
+        my $seq = EBook::FB2::Description::Sequence->new;
         $seq->load($node);
         $self->add_sequence($seq);
     }

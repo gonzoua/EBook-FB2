@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Binary;
+package EBook::FB2::Binary;
 
 use Moose;
 use MIME::Base64;

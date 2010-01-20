@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description::PublishInfo;
+package EBook::FB2::Description::PublishInfo;
 use Moose;
 
 has [qw/book_name publisher city year isbn/] => (isa => 'Str', is => 'rw');
@@ -59,7 +59,7 @@ sub load
 
     @nodes = $node->findnodes('sequence');
     foreach my $node (@nodes) {
-        my $seq = FB2::Book::Description::Sequence->new();
+        my $seq = EBook::FB2::Description::Sequence->new();
         $seq->load($node);
         $self->add_sequence($seq);
     }

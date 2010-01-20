@@ -22,10 +22,10 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description;
+package EBook::FB2::Description;
 
 use Moose;
-use FB2::Book::Description::TitleInfo;
+use EBook::FB2::Description::TitleInfo;
 
 has 'title_info' =>  (
     isa     => 'Object', 
@@ -71,7 +71,7 @@ sub load
         return;
     }
 
-    my $title_info = FB2::Book::Description::TitleInfo->new();
+    my $title_info = EBook::FB2::Description::TitleInfo->new();
     $title_info->load( $title_info_nodes[0]);
     $self->title_info($title_info);
 
@@ -83,7 +83,7 @@ sub load
     }
 
     if (@src_title_info_nodes) {
-        my $src_title_info = FB2::Book::Description::TitleInfo->new();
+        my $src_title_info = EBook::FB2::Description::TitleInfo->new();
         $src_title_info->load( $src_title_info_nodes[0]);
         $self->src_title_info($src_title_info);
     }
@@ -96,7 +96,7 @@ sub load
     }
 
     if (@publish_info_nodes) {
-        my $publish_info = FB2::Book::Description::TitleInfo->new();
+        my $publish_info = EBook::FB2::Description::TitleInfo->new();
         $publish_info->load( $publish_info_nodes[0]);
         $self->publish_info($publish_info);
     }

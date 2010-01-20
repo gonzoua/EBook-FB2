@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description::DocumentInfo;
+package EBook::FB2::Description::DocumentInfo;
 use Moose;
 
 has [qw/program_used date src_ocr id version history/] => (isa => 'Str', is => 'rw');
@@ -61,7 +61,7 @@ sub load
 
     @nodes = $node->findnodes('author');
     foreach my $node (@nodes) {
-        my $translator = FB2::Book::Description::Author->new();
+        my $translator = EBook::FB2::Description::Author->new();
         $translator->load($node);
         $self->add_author($translator);
     }

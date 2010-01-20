@@ -22,9 +22,9 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Body;
+package EBook::FB2::Body;
 use Moose;
-use FB2::Book::Body::Section;
+use EBook::FB2::Body::Section;
 
 has name => ( isa => 'Str', is => 'rw' );
 has title => ( isa => 'Ref', is => 'rw' );
@@ -77,7 +77,7 @@ sub load
 
     @nodes = $node->findnodes("section");
     foreach my $n (@nodes) {
-        my $s = FB2::Book::Body::Section->new();
+        my $s = EBook::FB2::Body::Section->new();
         $s->load($n);
         push @{$self->sections}, $s;
     }

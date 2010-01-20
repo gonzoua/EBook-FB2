@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description::Genre;
+package EBook::FB2::Description::Genre;
 use Moose;
 
 has genre => ( isa => 'Str', is => 'rw' );

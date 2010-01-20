@@ -22,16 +22,16 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book;
+package EBook::FB2;
 
 use Moose;
 use XML::DOM;
 use XML::DOM::XPath;
 use Carp;
 
-use FB2::Book::Description;
-use FB2::Book::Binary;
-use FB2::Book::Body;
+use EBook::FB2::Description;
+use EBook::FB2::Binary;
+use EBook::FB2::Body;
 
 has description => ( 
     isa     => 'Object',
@@ -85,14 +85,14 @@ sub load
         return;
     }
 
-    my $desc = FB2::Book::Description->new();
+    my $desc = EBook::FB2::Description->new();
     $desc->load($nodes[0]);
     $self->description($desc);
 
     # load binaries 
     @nodes = $xp->findnodes('/FictionBook/binary'); 
     foreach my $node (@nodes) {
-        my $bin = FB2::Book::Binary->new();
+        my $bin = EBook::FB2::Binary->new();
         $bin->load($node);
         push @{$self->binaries()}, $bin;
     }
@@ -101,7 +101,7 @@ sub load
     # Load bodies 
     @nodes = $xp->findnodes('/FictionBook/body'); 
     foreach my $node (@nodes) {
-        my $bin = FB2::Book::Body->new();
+        my $bin = EBook::FB2::Body->new();
         $bin->load($node);
         push @{$self->bodies()}, $bin;
     }

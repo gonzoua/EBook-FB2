@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Description::Author;
+package EBook::FB2::Description::Author;
 use Moose;
 
 has [qw/first_name middle_name last_name nickname home_page email id/] => (

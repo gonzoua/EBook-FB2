@@ -22,7 +22,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-package FB2::Book::Body::Section;
+package EBook::FB2::Body::Section;
 use Moose;
 use XML::DOM;
 
@@ -72,7 +72,7 @@ sub load
     @nodes = $node->findnodes("section");
     if (@nodes) {
         foreach my $n (@nodes) {
-            my $s = FB2::Book::Body::Section->new();
+            my $s = EBook::FB2::Body::Section->new();
             $s->load($n);
             push @{$self->subsections()}, $s;
         }
