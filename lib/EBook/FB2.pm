@@ -24,6 +24,8 @@
 
 package EBook::FB2;
 
+our $VERSION = 0.1;
+
 use Moose;
 use XML::DOM;
 use XML::DOM::XPath;
