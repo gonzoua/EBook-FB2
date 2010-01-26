@@ -31,13 +31,21 @@ has title => ( isa => 'Ref', is => 'rw' );
 has epigraphs => ( 
     isa     => 'ArrayRef',
     is => 'ro',
+    traits  => ['Array'],
     default => sub { [] },
+    handles => {
+        all_epigraphs   => 'elements',
+    }
 );
 has image => ( isa => 'Str', is => 'rw' );
 has sections => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
+    traits  => ['Array'],
     default => sub { [] },
+    handles => {
+        all_sections    => 'elements',
+    }
 );
 
 sub load
