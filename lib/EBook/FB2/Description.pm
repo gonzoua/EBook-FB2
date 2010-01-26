@@ -25,6 +25,10 @@
 package EBook::FB2::Description;
 
 use Moose;
+
+use EBook::FB2::Description::CustomInfo;
+use EBook::FB2::Description::DocumentInfo;
+use EBook::FB2::Description::PublishInfo;
 use EBook::FB2::Description::TitleInfo;
 
 has 'title_info' =>  (
@@ -58,6 +62,24 @@ has 'publish_info' =>  (
         publication_city    => 'city',
         publication_year    => 'year',
         isbn                => 'isbn',
+    },
+);
+
+has 'document_info' =>  (
+    isa     => 'Object', 
+    is      => 'rw', 
+    handles => {
+    },
+);
+
+has 'custom_info' =>  (
+    isa     => 'ArrayRef[Object]',
+    is      => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        custom_infos        => 'elements',
+        add_custom_info     => 'push',
     },
 );
 
@@ -96,12 +118,30 @@ sub load
     }
 
     if (@publish_info_nodes) {
-        my $publish_info = EBook::FB2::Description::TitleInfo->new();
+        my $publish_info = EBook::FB2::Description::PublishInfo->new();
         $publish_info->load( $publish_info_nodes[0]);
         $self->publish_info($publish_info);
     }
 
-    # TODO: add <custom-info> and <output> handlers
+    my @document_info_nodes = $node->findnodes('document-info');
+
+    if (@document_info_nodes != 1) {
+        croak ("Wrong number of <document-info> element");
+        return;
+    }
+
+    my $document_info = EBook::FB2::Description::DocumentInfo->new();
+    $document_info->load( $document_info_nodes[0]);
+    $self->document_info($document_info);
+
+    my @custom_info_nodes = $node->findnodes('custom-info');
+
+    foreach my $n (@custom_info_nodes) {
+        my $custom_info = EBook::FB2::Description::CustomInfo->new();
+        $custom_info->load( $n );
+        $self->add_custom_info($custom_info);
+    }
+
 }
 
 1;
