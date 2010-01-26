@@ -15,4 +15,9 @@ lib/EBook/FB2/Description/PublishInfo.pm
 lib/EBook/FB2/Description/Sequence.pm
 lib/EBook/FB2/Description/TitleInfo.pm
 t/00-load.t
+t/01-author.t
+t/02-sequence.t
+t/03-genre.t
+t/04-custominfo.t
+t/05-binary.t
 t/manifest.t
