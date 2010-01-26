@@ -24,34 +24,86 @@
 
 package EBook::FB2::Description::DocumentInfo;
 use Moose;
+use Carp;
+
+use EBook::FB2::Description::Author;
 
 has [qw/program_used date src_ocr id version history/] => (isa => 'Str', is => 'rw');
-has authors => (isa => 'ArrayRef', is => 'ro', default => sub { [] });
-has src_urls => (isa => 'ArrayRef', is => 'ro', default => sub { [] });
-has publishers => (isa => 'ArrayRef', is => 'ro', default => sub { [] });
+
+has author => ( 
+    isa     => 'ArrayRef',
+    is => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        authors     => 'elements',
+        add_author  => 'push',
+    },
+);
+
+has src_url => ( 
+    isa     => 'ArrayRef',
+    is => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        src_urls    => 'elements',
+        add_src_url => 'push',
+    },
+);
+
+has publisher => ( 
+    isa     => 'ArrayRef',
+    is => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        publishers      => 'elements',
+        add_publisher   => 'push',
+    },
+);
+
 
 sub load
 {
-    my @nodes = $node->findnodes('program-used');
+    my ($self, $node) = @_;
+
+    my @nodes = $node->findnodes('author');
+    foreach my $author_node (@nodes) {
+        my $author = EBook::FB2::Description::Author->new;
+        $author->load($author_node);
+        $self->add_author($author);
+    }
+
+    @nodes = $node->findnodes('program-used');
     if (@nodes) {
         $self->program_used($nodes[0]->string_value());
     }
 
-    # TODO: parse date
-
-    @nodes = $node->findnodes('src-ocr');
+    @nodes = $node->findnodes('date');
+    if (@nodes == 0) {
+        croak "Wrong number of <date> elements in <document-info>";
+    }
     if (@nodes) {
-        $self->src_ocr($nodes[0]->string_value());
+        $self->date($nodes[0]->string_value());
     }
 
     @nodes = $node->findnodes('id');
+    if (@nodes == 0) {
+        croak "Wrong number of <id> elements in <document-info>";
+    }
     if (@nodes) {
         $self->id($nodes[0]->string_value());
     }
 
-    @nodes = $node->findnodes('version');
+    @nodes = $node->findnodes('src_url');
+    foreach my $src_url_node (@nodes) {
+        $self->add_src_url($src_url_node->string_value());
+    }
+
+    @nodes = $node->findnodes('src_ocr');
     if (@nodes) {
-        $self->version($nodes[0]->string_value());
+        $self->src_ocr($nodes[0]->string_value());
     }
 
     @nodes = $node->findnodes('history');
@@ -59,39 +111,16 @@ sub load
         $self->history($nodes[0]->string_value());
     }
 
-    @nodes = $node->findnodes('author');
-    foreach my $node (@nodes) {
-        my $translator = EBook::FB2::Description::Author->new();
-        $translator->load($node);
-        $self->add_author($translator);
-    }
-
     @nodes = $node->findnodes('publisher');
-    foreach my $node (@nodes) {
-        $self->add_publisher($node->string_value());
+    foreach my $publisher_node (@nodes) {
+        $self->add_publisher($publisher_node->string_value());
     }
-
-    @nodes = $node->findnodes('src-url');
-    foreach my $node (@nodes) {
-        $self->add_src_url($node->string_value());
-    }
-
 }
 
-sub add_author
+sub add_sequence
 {
-    my ($self, $author) = @_;
-    push @{$self->authors()}, $author;
+    my ($self, $seq) = @_;
+    push @{$self->sequnces()}, $seq;
 }
 
-sub add_publisher
-{
-    my ($self, $publisher) = @_;
-    push @{$self->publishers()}, $publisher;
-}
-
-sub add_src_url
-{
-    my ($self, $src_url) = @_;
-    push @{$self->src_urls()}, $src_url;
-}
+1;
