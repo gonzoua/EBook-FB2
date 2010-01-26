@@ -25,9 +25,31 @@
 package EBook::FB2::Description::Author;
 use Moose;
 
-has [qw/first_name middle_name last_name nickname home_page email id/] => (
+has [qw/first_name middle_name last_name nickname id/] => (
     isa     => 'Str',
     is      => 'rw'
+);
+
+has home_page => ( 
+    isa     => 'ArrayRef',
+    is => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        home_pages      => 'elements',
+        add_home_page   => 'push',
+    },
+);
+
+has email => ( 
+    isa     => 'ArrayRef',
+    is      => 'ro',
+    traits  => ['Array'],
+    default => sub { [] },
+    handles => {
+        emails      => 'elements',
+        add_email   => 'push',
+    },
 );
 
 sub load
@@ -55,13 +77,13 @@ sub load
     }
 
     @nodes = $node->findnodes('home-page');
-    if (@nodes) {
-        $self->home_page($nodes[0]->string_value());
+    foreach my $n (@nodes) {
+        $self->add_home_page($n->string_value());
     }
 
     @nodes = $node->findnodes('email');
-    if (@nodes) {
-        $self->email($nodes[0]->string_value());
+    foreach my $n (@nodes) {
+        $self->add_email($n->string_value());
     }
 
     @nodes = $node->findnodes('id');
