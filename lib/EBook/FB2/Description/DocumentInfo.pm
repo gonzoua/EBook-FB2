@@ -96,12 +96,12 @@ sub load
         $self->id($nodes[0]->string_value());
     }
 
-    @nodes = $node->findnodes('src_url');
+    @nodes = $node->findnodes('src-url');
     foreach my $src_url_node (@nodes) {
         $self->add_src_url($src_url_node->string_value());
     }
 
-    @nodes = $node->findnodes('src_ocr');
+    @nodes = $node->findnodes('src-ocr');
     if (@nodes) {
         $self->src_ocr($nodes[0]->string_value());
     }
@@ -111,16 +111,17 @@ sub load
         $self->history($nodes[0]->string_value());
     }
 
+    @nodes = $node->findnodes('version');
+    if (@nodes) {
+        $self->version($nodes[0]->string_value());
+    }
+
+
+
     @nodes = $node->findnodes('publisher');
     foreach my $publisher_node (@nodes) {
         $self->add_publisher($publisher_node->string_value());
     }
-}
-
-sub add_sequence
-{
-    my ($self, $seq) = @_;
-    push @{$self->sequnces()}, $seq;
 }
 
 1;
