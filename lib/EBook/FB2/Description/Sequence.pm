@@ -25,8 +25,7 @@
 package EBook::FB2::Description::Sequence;
 use Moose;
 
-has name => ( isa => 'Str', is => 'rw' );
-has number => ( isa => 'Int', is => 'rw', default => 100 );
+has [qw/name number/] => ( isa => 'Str', is => 'rw' );
 
 sub load 
 {

@@ -25,19 +25,21 @@
 package EBook::FB2::Description::Genre;
 use Moose;
 
-has genre => ( isa => 'Str', is => 'rw' );
-has percent => ( isa => 'Int', is => 'rw' );
+has [qw/name match/] => ( isa => 'Str', is => 'rw' );
 
 sub load 
 {
     my ($self, $node) = @_;
-    my $pnode = $node->getAttribute("match");
-    if ($pnode) {
-        $self->percent($pnode);
+
+    my $match_node = $node->getAttribute("match");
+    if ($match_node) {
+        $self->match($match_node);
     }
     else {
-        $self->percent(100);
+        $self->match(100);
     }
+
+    $self->name($node->string_value);
 }
 
 1;
