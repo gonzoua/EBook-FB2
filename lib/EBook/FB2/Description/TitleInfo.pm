@@ -33,54 +33,59 @@ has [qw/book_title keywords date lang src_lang/] => (
     is      => 'rw'
 );
 
-has genres => (
+has genre => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
     default => sub { [] },
     handles => {
-       all_genres   => 'elements',
+       genres       => 'elements',
+       add_genre    => 'push',
     },
 );
 
-has authors => (
+has author => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
     default => sub { [] },
     handles => {
-       all_authors   => 'elements' 
-    }
+       authors      => 'elements',
+       add_author   => 'push',
+    },
 );
 
-has translators => (
+has translator => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
     default => sub { [] },
     handles => {
-       all_translators   => 'elements' 
-    }
+       translators      => 'elements',
+       add_translator   => 'push',
+    },
 );
 
-has sequences => (
+has sequence => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
     default => sub { [] },
     handles => {
-       all_sequences   => 'elements' 
-    }
+       sequences        => 'elements',
+       add_sequence     => 'push',
+    },
 );
 
-has coverpages => (
+has coverpage => (
     traits  => ['Array'],
-    isa     => 'ArrayRef[Object]',
+    isa     => 'ArrayRef[Str]',
     is      => 'rw',
     default => sub { [] },
     handles => {
-       all_coverpages   => 'elements' 
-    }
+       coverpages       => 'elements',
+       add_coverpage    => 'push',
+    },
 );
 
 sub load
@@ -102,7 +107,7 @@ sub load
         $self->lang($nodes[0]->string_value);
     }
 
-    @nodes = $node->findnodes('src_lang');
+    @nodes = $node->findnodes('src-lang');
     if (@nodes) {
         $self->src_lang($nodes[0]->string_value);
     }
@@ -157,36 +162,6 @@ sub load
             $i++;
         }
     }
-}
-
-sub add_author
-{
-    my ($self, $author) = @_;
-    push @{$self->authors}, $author;
-}
-
-sub add_translator
-{
-    my ($self, $translator) = @_;
-    push @{$self->translators}, $translator;
-}
-
-sub add_genre
-{
-    my ($self, $genre) = @_;
-    push @{$self->genres}, $genre;
-}
-
-sub add_sequence
-{
-    my ($self, $seq) = @_;
-    push @{$self->sequences}, $seq;
-}
-
-sub add_coverpage
-{
-    my ($self, $id) = @_;
-    push @{$self->coverpages}, $id;
 }
 
 1;
