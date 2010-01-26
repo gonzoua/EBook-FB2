@@ -47,9 +47,9 @@ has description => (
 );
 
 has bodies => (
-    traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
+    traits  => ['Array'],
     default => sub { [] },
     handles => {
         all_bodies      => 'elements',
