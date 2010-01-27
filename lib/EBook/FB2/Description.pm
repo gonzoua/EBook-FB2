@@ -36,20 +36,30 @@ has 'title_info' =>  (
     is      => 'rw', 
     handles => {
         book_title  => 'book_title',
-        authors     => 'all_authors',
-        translators => 'all_translators',
-        genres      => 'all_genres',
+        authors     => 'authors',
+        translators => 'translators',
+        sequences   => 'sequences',
+        genres      => 'genres',
         lang        => 'lang',
-        coverpages  => 'all_coverpages',
+        src_lang    => 'src_lang',
+        date        => 'date',
+        keywords    => 'keywords',
+        coverpages  => 'coverpages',
     },
 );
 
-# TODO: more handlers
 has 'src_title_info' =>  (
     isa     => 'Object', 
     is      => 'rw', 
     handles => {
-        src_book_title => 'book_title',
+        src_book_title  => 'book_title',
+        src_authors     => 'authors',
+        src_translators => 'translators',
+        src_sequences   => 'sequences',
+        src_genres      => 'genres',
+        src_date        => 'date',
+        src_keywords    => 'keywords',
+        src_coverpages  => 'coverpages',
     },
 );
 
@@ -65,10 +75,20 @@ has 'publish_info' =>  (
     },
 );
 
+
 has 'document_info' =>  (
     isa     => 'Object', 
     is      => 'rw', 
     handles => {
+        document_publishers     => 'publishers',
+        document_src_urls       => 'src_urls',
+        document_authors        => 'authors',
+        document_program_used   => 'program_used',
+        document_date           => 'date',
+        document_src_ocr        => 'src_ocr',
+        document_id             => 'id',
+        document_version        => 'version',
+        document_history        => 'history',
     },
 );
 
