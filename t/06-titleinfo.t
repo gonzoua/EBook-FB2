@@ -1,6 +1,6 @@
 #!perl -T
 
-use Test::More tests => 10;
+use Test::More tests => 11;
 use XML::DOM;
 use XML::DOM::XPath;
 use EBook::FB2::Description::TitleInfo;
@@ -46,6 +46,8 @@ my $author_data = <<__EOXML__;
   <coverpage><image l:href="#cover3.jpg"/></coverpage>
   <coverpage><image l:href="#cover4.jpg"/></coverpage>
   <coverpage><image l:href="#cover5.jpg"/></coverpage>
+
+  <annotation>test annotation</annotation>
 </title-info>
 __EOXML__
 
@@ -66,3 +68,4 @@ is($title_info->date, '1234-1234');
 is($title_info->lang, 'ru');
 is($title_info->src_lang, 'en');
 is($title_info->book_title, 'title');
+is($title_info->annotation->string_value, 'test annotation');

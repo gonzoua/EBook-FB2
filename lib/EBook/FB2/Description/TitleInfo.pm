@@ -33,6 +33,8 @@ has [qw/book_title keywords date lang src_lang/] => (
     is      => 'rw'
 );
 
+has annotation => ( isa => 'Ref', is => 'rw' );
+
 has genre => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
@@ -162,6 +164,13 @@ sub load
             $i++;
         }
     }
+
+    @nodes = $node->findnodes('annotation');
+    if (@nodes) {
+        $self->annotation($nodes[0]);
+    }
+
+
 }
 
 1;
