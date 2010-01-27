@@ -92,7 +92,7 @@ has 'document_info' =>  (
     },
 );
 
-has 'custom_info' =>  (
+has '_custom_infos' =>  (
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
     traits  => ['Array'],

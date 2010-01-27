@@ -35,7 +35,7 @@ has [qw/book_title keywords date lang src_lang/] => (
 
 has annotation => ( isa => 'Ref', is => 'rw' );
 
-has genre => (
+has _genres => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
@@ -46,7 +46,7 @@ has genre => (
     },
 );
 
-has author => (
+has _authors => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
@@ -57,7 +57,7 @@ has author => (
     },
 );
 
-has translator => (
+has _translators => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
@@ -68,7 +68,7 @@ has translator => (
     },
 );
 
-has sequence => (
+has _sequences => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Object]',
     is      => 'rw',
@@ -79,7 +79,7 @@ has sequence => (
     },
 );
 
-has coverpage => (
+has _coverpages => (
     traits  => ['Array'],
     isa     => 'ArrayRef[Str]',
     is      => 'rw',

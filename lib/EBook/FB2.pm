@@ -40,7 +40,7 @@ has description => (
     is      => 'rw', 
 );
 
-has body => (
+has _bodies => (
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
     traits  => ['Array'],
@@ -51,7 +51,7 @@ has body => (
     },
 );
 
-has binary => (
+has _binaries => (
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
     traits  => ['Array'],

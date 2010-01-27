@@ -28,7 +28,7 @@ use EBook::FB2::Body::Section;
 
 has name => ( isa => 'Str', is => 'rw' );
 has title => ( isa => 'Ref', is => 'rw' );
-has epigraph => ( 
+has _epigraphs => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],
@@ -39,7 +39,7 @@ has epigraph => (
     }
 );
 has image => ( isa => 'Str', is => 'rw' );
-has section => ( 
+has _sections => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
     traits  => ['Array'],

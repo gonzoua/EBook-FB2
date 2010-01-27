@@ -30,7 +30,7 @@ use EBook::FB2::Description::Author;
 
 has [qw/program_used date src_ocr id version history/] => (isa => 'Str', is => 'rw');
 
-has author => ( 
+has _authors => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],
@@ -41,7 +41,7 @@ has author => (
     },
 );
 
-has src_url => ( 
+has _src_urls => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],
@@ -52,7 +52,7 @@ has src_url => (
     },
 );
 
-has publisher => ( 
+has _publishers => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],

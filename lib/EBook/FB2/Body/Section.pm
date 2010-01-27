@@ -30,7 +30,7 @@ has id => ( isa => 'Str', is => 'rw' );
 has title => ( isa => 'Ref', is => 'rw' );
 has image => ( isa => 'Ref', is => 'rw' );
 has data => ( isa => 'Ref', is => 'rw' );
-has epigraph => ( 
+has _epigraphs => ( 
     isa     => 'ArrayRef',
     is      => 'rw',
     traits  => ['Array'],
@@ -41,7 +41,7 @@ has epigraph => (
     },
 );
 
-has subsection => ( 
+has _subsections => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
     traits  => ['Array'],

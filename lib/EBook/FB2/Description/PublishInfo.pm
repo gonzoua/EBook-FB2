@@ -29,7 +29,7 @@ use EBook::FB2::Description::Sequence;
 
 has [qw/book_name publisher city year isbn/] => (isa => 'Str', is => 'rw');
 
-has sequence => ( 
+has _sequences => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],

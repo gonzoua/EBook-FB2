@@ -30,7 +30,7 @@ has [qw/first_name middle_name last_name nickname id/] => (
     is      => 'rw'
 );
 
-has home_page => ( 
+has _home_pages => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],
@@ -41,7 +41,7 @@ has home_page => (
     },
 );
 
-has email => ( 
+has _emails => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
     traits  => ['Array'],
