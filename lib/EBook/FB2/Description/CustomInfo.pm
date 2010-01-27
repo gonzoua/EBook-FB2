@@ -39,7 +39,7 @@ sub load
         $self->info_type($attr_node);
     }
     else {
-        croak "No info-type attribute in <custom-info>";
+        carp "No info-type attribute in <custom-info>";
     }
 
     $self->info($node->string_value);
