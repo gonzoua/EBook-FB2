@@ -28,23 +28,25 @@ use EBook::FB2::Body::Section;
 
 has name => ( isa => 'Str', is => 'rw' );
 has title => ( isa => 'Ref', is => 'rw' );
-has epigraphs => ( 
+has epigraph => ( 
     isa     => 'ArrayRef',
     is => 'ro',
     traits  => ['Array'],
     default => sub { [] },
     handles => {
-        all_epigraphs   => 'elements',
+        epigraphs       => 'elements',
+        add_epigraph    => 'push',
     }
 );
 has image => ( isa => 'Str', is => 'rw' );
-has sections => ( 
+has section => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
     traits  => ['Array'],
     default => sub { [] },
     handles => {
-        all_sections    => 'elements',
+        sections    => 'elements',
+        add_section => 'push',
     }
 );
 
@@ -62,8 +64,8 @@ sub load
         $self->title($nodes[0]);
     }
     @nodes = $node->findnodes("epigraph");
-    if (@nodes) {
-        push @{$self->epigraphs}, @nodes;
+    foreach my $n (@nodes) {
+        $self->add_epigraph($n);
     }
 
     @nodes = $node->findnodes("image");
@@ -87,7 +89,7 @@ sub load
     foreach my $n (@nodes) {
         my $s = EBook::FB2::Body::Section->new();
         $s->load($n);
-        push @{$self->sections}, $s;
+        $self->add_section($s);
     }
 }
 

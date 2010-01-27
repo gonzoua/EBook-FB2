@@ -46,23 +46,25 @@ has description => (
     },
 );
 
-has bodies => (
+has body => (
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
     traits  => ['Array'],
     default => sub { [] },
     handles => {
-        all_bodies      => 'elements',
+        bodies      => 'elements',
+        add_body    => 'push',
     },
 );
 
-has binaries => (
-    traits  => ['Array'],
+has binary => (
     isa     => 'ArrayRef[Object]',
     is      => 'ro',
+    traits  => ['Array'],
     default => sub { [] },
     handles => {
-        all_binaries    => 'elements',
+        binaries    => 'elements',
+        add_binary  => 'push',
     },
 );
 
@@ -96,7 +98,7 @@ sub load
     foreach my $node (@nodes) {
         my $bin = EBook::FB2::Binary->new();
         $bin->load($node);
-        push @{$self->binaries()}, $bin;
+        $self->add_binary($bin);
     }
 
 
@@ -105,7 +107,7 @@ sub load
     foreach my $node (@nodes) {
         my $bin = EBook::FB2::Body->new();
         $bin->load($node);
-        push @{$self->bodies()}, $bin;
+        $self->add_body($bin);
     }
 
     # XXX: handle stylesheet?
