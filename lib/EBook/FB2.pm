@@ -79,7 +79,7 @@ sub load
     my @nodes = $xp->findnodes('/FictionBook/description'); 
     if (@nodes != 1) {
         my $descriptions = @nodes;
-        croak "There should be only one <description> element";
+        warn "There should be only one <description> element";
         return;
     }
 

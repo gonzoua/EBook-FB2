@@ -24,7 +24,6 @@
 
 package EBook::FB2::Description::CustomInfo;
 use Moose;
-use Carp;
 
 use EBook::FB2::Description::Author;
 
@@ -39,7 +38,7 @@ sub load
         $self->info_type($attr_node);
     }
     else {
-        carp "No info-type attribute in <custom-info>";
+        warn "No info-type attribute in <custom-info>";
     }
 
     $self->info($node->string_value);

@@ -24,7 +24,6 @@
 
 package EBook::FB2::Description::DocumentInfo;
 use Moose;
-use Carp;
 
 use EBook::FB2::Description::Author;
 
@@ -82,7 +81,7 @@ sub load
 
     @nodes = $node->findnodes('date');
     if (@nodes == 0) {
-        croak "Wrong number of <date> elements in <document-info>";
+        warn "Wrong number of <date> elements in <document-info>";
     }
     if (@nodes) {
         $self->date($nodes[0]->string_value());
@@ -90,7 +89,7 @@ sub load
 
     @nodes = $node->findnodes('id');
     if (@nodes == 0) {
-        croak "Wrong number of <id> elements in <document-info>";
+        warn "Wrong number of <id> elements in <document-info>";
     }
     if (@nodes) {
         $self->id($nodes[0]->string_value());

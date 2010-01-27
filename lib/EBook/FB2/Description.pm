@@ -109,7 +109,7 @@ sub load
     my @title_info_nodes = $node->findnodes('title-info');
 
     if (@title_info_nodes != 1) {
-        croak ("Wrong number of <title-info> element");
+        warn ("Wrong number of <title-info> element");
         return;
     }
 
@@ -120,7 +120,7 @@ sub load
     my @src_title_info_nodes = $node->findnodes('src-title-info');
 
     if (@src_title_info_nodes > 1) {
-        croak ("Wrong number of <src-title-info> element");
+        warn ("Wrong number of <src-title-info> element");
         return;
     }
 
@@ -133,7 +133,7 @@ sub load
     my @publish_info_nodes = $node->findnodes('publish-info');
 
     if (@publish_info_nodes > 1) {
-        croak ("Wrong number of <publish-info> element");
+        warn ("Wrong number of <publish-info> element");
         return;
     }
 
@@ -146,7 +146,7 @@ sub load
     my @document_info_nodes = $node->findnodes('document-info');
 
     if (@document_info_nodes != 1) {
-        croak ("Wrong number of <document-info> element");
+        warn ("Wrong number of <document-info> element");
         return;
     }
 
