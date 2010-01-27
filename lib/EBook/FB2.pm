@@ -24,7 +24,7 @@
 
 package EBook::FB2;
 
-our $VERSION = 0.1;
+our $VERSION = 0.2;
 
 use Moose;
 use XML::DOM;
