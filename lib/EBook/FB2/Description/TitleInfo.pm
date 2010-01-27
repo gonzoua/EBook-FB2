@@ -174,3 +174,82 @@ sub load
 }
 
 1;
+
+__END__
+=head1 NAME
+
+EBook::FB2::Description::TitleInfo
+
+=head1 SYNOPSIS
+
+EBook::FB2::Description::TitleInfo - meta information of hardcopy document 
+
+=head1 SUBROUTINES/METHODS
+
+=over 4
+
+=item annotation()
+
+Returns reference to XML::DOM::Node, parsed annotation
+
+=item authors()
+
+Returns list of book authors (references to L<EBook::FB2::Description::Author>)
+
+=item book_title()
+
+Returns book title
+
+=item coverpages()
+
+Returns list of ids that references to images with original cover artwork
+
+=item date()
+
+Returns book creation date
+
+=item genres()
+
+Returns list of genres book falls in (references to 
+L<EBook::FB2::Description::Genre>)
+
+=item keywords()
+
+Returns book keyword
+
+=item lang()
+
+Returns book language: "en", "ru", etc...
+
+=item sequences()
+
+Returns list of sequences book belongs to (references to L<EBook::FB2::Description::Sequence>)
+
+=item src_lang()
+
+Original book language. Valid if book is translation.
+
+=item translators()
+
+Returns list of translators represented by references to 
+L<EBook::FB2::Description::Author> objects;
+
+=back
+
+=head1 AUTHOR
+
+Oleksandr Tymoshenko, E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to  E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2009, 2010 Oleksandr Tymoshenko.
+
+L<http://bluezbox.com>
+
+This module is free software; you can redistribute it and/or
+modify it under the terms of the BSD license. See the F<LICENSE> file
+included with this distribution.

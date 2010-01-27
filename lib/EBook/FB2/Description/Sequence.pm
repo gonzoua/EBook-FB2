@@ -40,3 +40,44 @@ sub load
 }
 
 1;
+
+__END__
+=head1 NAME
+
+EBook::FB2::Description::Sequence
+
+=head1 SYNOPSIS
+
+EBook::FB2::Description::Sequence - sequence of books
+
+=head1 SUBROUTINES/METHODS
+
+=over 4
+
+=item name()
+
+Returns sequence name
+
+=item number()
+
+Returns number in sequence
+
+=back
+
+=head1 AUTHOR
+
+Oleksandr Tymoshenko, E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to  E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2009, 2010 Oleksandr Tymoshenko.
+
+L<http://bluezbox.com>
+
+This module is free software; you can redistribute it and/or
+modify it under the terms of the BSD license. See the F<LICENSE> file
+included with this distribution.

@@ -38,12 +38,6 @@ use EBook::FB2::Body;
 has description => ( 
     isa     => 'Object',
     is      => 'rw', 
-    handles => {
-        title   => 'book_title',
-        lang    => 'lang',
-        authors => 'authors',
-        coverpages => 'coverpages',
-    },
 );
 
 has body => (
@@ -115,3 +109,61 @@ sub load
 }
 
 1;
+
+__END__
+=head1 NAME
+
+EBook::FB2
+
+=head1 VERSION
+
+Version 0.1
+
+=head1 SYNOPSIS
+
+
+    use EBook::FB2;
+
+    my $fb2 = EBook::FB2->new;
+    $fb2->load("/path/to/file.fb2");
+
+=head1 SUBROUTINES/METHODS
+
+=over 4
+
+=item binaries()
+
+Returns array of references to L<EBook::FB2::Binary> objects
+
+=item bodies()
+
+Returns array of references to L<EBook::FB2::Body> objects
+
+=item description()
+
+Returns reference to L<EBook::FB2::Description> object that contains book metadata
+
+=item load($filename)
+
+Load FB2 document from $filename
+
+
+=back
+
+=head1 AUTHOR
+
+Oleksandr Tymoshenko, E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to  E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2009, 2010 Oleksandr Tymoshenko.
+
+L<http://bluezbox.com>
+
+This module is free software; you can redistribute it and/or
+modify it under the terms of the BSD license. See the F<LICENSE> file
+included with this distribution.

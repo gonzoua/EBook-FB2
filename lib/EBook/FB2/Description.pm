@@ -165,3 +165,211 @@ sub load
 }
 
 1;
+
+__END__
+=head1 NAME
+
+EBook::FB2::Description
+
+=head1 SYNOPSIS
+
+EBook::FB2::Description - FB2 document metadata
+
+=head1 SUBROUTINES/METHODS
+
+=over 4
+
+=item title_info()
+
+Returns reference to L<EBook::FB2::Description::TitleInfo> object that 
+contains book metadata.
+
+=item src_title_info()
+
+Returns reference to L<EBook::FB2::Description::TitleInfo> object that 
+contains original book metadata. Valid if book is translation.
+
+=item publish_info()
+
+Returns reference to L<EBook::FB2::Description::PublicationInfo>
+
+
+=item document_info()
+
+Returns reference to L<EBook::FB2::Description::DocumentInfo> object that 
+contains document metadata: program used, OCR info, etc.
+
+=item custom_infos()
+
+Returns list of references to L<EBook::FB2::Description::CustomInfo> objects
+
+=back 
+
+=head1 FORWARDED METHODS
+
+These methods provided to make access to document metada easier and generally 
+they are just forwarders to B<title_info>, B<src_title_info>, B<document_info>,
+B<publish_info> members
+
+    # these are the same
+    my $src_title = $fb2->desciption->src_book_title;
+    my $src_title = $fb2->desciption->src_title_info->book_title;
+
+    # these are the same
+    my $isbn = $fb2->desciption->isbn;
+    my $isbn = $fb2->desciption->publication_info->isbn;
+
+    
+You've got the idea...
+
+=over 4
+
+=item annotation()
+
+Returns reference to XML::DOM::Node, parsed annotation
+
+=item authors()
+
+Returns list of book authors (references to L<EBook::FB2::Description::Author>)
+
+=item book_title()
+
+Returns book title
+
+=item coverpages()
+
+Returns list of ids that references to images with original cover artwork
+
+=item date()
+
+Returns book creation date
+
+=item document_authors()
+
+Returns document(fb2) creators
+
+=item document_date()
+
+Returns document(fb2) moification/creation date
+
+=item document_history()
+
+Returns document(fb2) history
+
+=item document_id()
+
+Returns document(fb2) id
+
+=item document_program_used()
+
+Returns program that has been used for generating this document
+
+=item document_publishers()
+
+Returns publisher of FB2 document (not book)
+
+=item document_src_ocr()
+
+Returns OCR author
+
+=item document_src_urls()
+
+Returns source URL of original document
+
+=item document_version()
+
+Return document version
+
+=item genres()
+
+Returns list of genres book falls in (references to 
+L<EBook::FB2::Description::Genre>)
+
+=item isbn()
+
+Returns book ISBN
+
+=item keywords()
+
+Returns book keyword
+
+=item lang()
+
+Return book languagage: "ru", "en", etc...
+
+=item publication_city()
+
+Returns city where book has been published
+
+=item publication_title()
+
+Returns original publication title
+
+=item publication_year()
+
+Returns publication year
+
+=item publisher()
+
+Returns book publisher
+
+=item sequences()
+
+Returns list of sequences book belongs to (references to L<EBook::FB2::Description::Sequence>)
+
+=item src_authors()
+
+See L<authors>. Valid if book is translation.
+
+=item src_book_title()
+
+See L<book_title>. Valid if book is translation.
+
+=item src_coverpages()
+
+See L<coverpages>. Valid if book is translation.
+
+=item src_date()
+
+See L<date>. Valid if book is translation.
+
+=item src_genres()
+
+See L<genres>. Valid if book is translation.
+
+=item src_keywords()
+
+See L<keywords>. Valid if book is translation.
+
+=item src_lang()
+
+Original book language. Valid if book is translation.
+
+=item src_sequences()
+
+See L<sequences>. Valid if book is translation.
+
+=item translators()
+
+Returns list of translators represented by references to 
+L<EBook::FB2::Description::Author> objects;
+
+=back
+
+=head1 AUTHOR
+
+Oleksandr Tymoshenko, E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to  E<lt>gonzo@bluezbox.comE<gt>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2009, 2010 Oleksandr Tymoshenko.
+
+L<http://bluezbox.com>
+
+This module is free software; you can redistribute it and/or
+modify it under the terms of the BSD license. See the F<LICENSE> file
+included with this distribution.
