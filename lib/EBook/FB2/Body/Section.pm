@@ -30,16 +30,26 @@ has id => ( isa => 'Str', is => 'rw' );
 has title => ( isa => 'Ref', is => 'rw' );
 has image => ( isa => 'Ref', is => 'rw' );
 has data => ( isa => 'Ref', is => 'rw' );
-has epigraphs => ( 
+has epigraph => ( 
     isa     => 'ArrayRef',
     is      => 'rw',
+    traits  => ['Array'],
     default => sub { [] },
+    handles => {
+        epigraphs       => 'elements',
+        add_epigraph    => 'push',
+    },
 );
 
-has subsections => ( 
+has subsection => ( 
     isa     => 'ArrayRef',
     is      => 'ro',
+    traits  => ['Array'],
     default => sub { [] },
+    handles => {
+        subsections         => 'elements',
+        add_subsection      => 'push',
+    },
 );
 
 sub load
@@ -63,8 +73,8 @@ sub load
     @nodes = $node->findnodes("epigraph");
     if (@nodes) {
         # separate epigraphs and main body
-        push @{$self->epigraphs}, @nodes;
         foreach my $kid (@nodes) {
+            $self->add_epigraph($kid);
             $node->removeChild($kid);
         }
     }
@@ -74,7 +84,7 @@ sub load
         foreach my $n (@nodes) {
             my $s = EBook::FB2::Body::Section->new();
             $s->load($n);
-            push @{$self->subsections()}, $s;
+            $self->add_subsection($s);
         }
     }
     # store raw XML::DOM::Node for collecting ids.
@@ -116,6 +126,5 @@ sub plaintext_title
 
     return $section_title;
 }
-
 
 1;
