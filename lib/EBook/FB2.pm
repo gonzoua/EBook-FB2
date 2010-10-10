@@ -72,13 +72,14 @@ sub load
     };
 
     if ($@) {
-        carp("Failed to parse $file");
+        carp("Failed to parse $file: $@");
         return;
     }
 
     my @nodes = $xp->findnodes('/FictionBook/description'); 
     if (@nodes != 1) {
         my $descriptions = @nodes;
+        $xp->dispose;
         warn "There should be only one <description> element";
         return;
     }
@@ -105,6 +106,7 @@ sub load
     }
 
     # XXX: handle stylesheet?
+    $xp->dispose;
     return 1;
 }
 
