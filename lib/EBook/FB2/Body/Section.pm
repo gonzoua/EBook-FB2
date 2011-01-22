@@ -88,7 +88,7 @@ sub load
         }
     }
     # store raw XML::DOM::Node for collecting ids.
-    $self->data($node);
+    $self->data($node->cloneNode(1));
 }
 
 #
