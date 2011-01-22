@@ -85,8 +85,30 @@ sub load
         }
     }
 
-    @nodes = $node->findnodes("section");
-    foreach my $n (@nodes) {
+    my $fake_section_node;
+    my $fake_section_count = 0;
+    foreach my $kid ($node->getChildNodes) {
+        if (lc($kid->getNodeName) eq 'section') {
+            if (defined($fake_section_node)) {
+                $node->insertBefore($fake_section_node, $kid);
+                $fake_section_node = undef;
+            }
+        }
+        else {
+            if (!defined($fake_section_node)) {
+                $fake_section_node = new XML::DOM::Element($node->getOwnerDocument, "section");
+                $fake_section_node->setAttribute("id", "fakesection$fake_section_count");
+                $fake_section_count++;
+            }
+            my $orphan = $node->removeChild($kid);
+            $fake_section_node->appendChild($orphan);
+        }
+    }
+
+    $node->appendChild($fake_section_node) if(defined($fake_section_node));
+
+    foreach my $n ($node->getChildNodes) {
+        next if (lc($n->getNodeName) ne 'section');
         my $s = EBook::FB2::Body::Section->new();
         $s->load($n);
         $self->add_section($s);
