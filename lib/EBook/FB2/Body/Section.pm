@@ -79,6 +79,15 @@ sub load
         }
     }
 
+    @nodes = $node->findnodes("image");
+    if (@nodes) {
+        $self->image($nodes[0]);
+        # separate title and main body
+        foreach my $kid (@nodes) {
+            $node->removeChild($kid);
+        }
+    }
+
     @nodes = $node->findnodes("section");
     if (@nodes) {
         foreach my $n (@nodes) {
